@@ -85,17 +85,37 @@ def create_sine_wave_plot():
     ax.set_xlabel("X-axis")
     ax.set_ylabel("Y-axis")
     ax.grid()
-    plt.show()
+    # plt.show()
     return fig, ax
 
-# example usage
-print_hello_world()
+# # example usage
+# print_hello_world()
+
+# %%
+def reset_tag_year_from_terminal(tag):
+    """Reset the year in the tag based on a command-line argument."""
+    if len(sys.argv) > 1:
+        try:
+            year = int(sys.argv[1])
+            parts = tag.split("_")
+            if len(parts) > 0:
+                parts[0] = str(year)
+                new_tag = "_".join(parts)
+                logging.info("Tag updated from %s to %s", tag, new_tag)
+                return new_tag
+        except ValueError:
+            logging.error("Invalid year provided. Please provide a valid integer year.")
+    else:
+        logging.warning("No year provided. Using the default tag.")
+    return tag
 
 # %%
 """ 6. main """
 if __name__ == "__main__":
-    # 6.1. set up logging
-    configure.setup_logging(tag=TAG)  # set up logging
+    # 6.0. reset the tag year from terminal
+    TAG = reset_tag_year_from_terminal(tag=TAG)  # Update TAG with the new year if provided
+
+    # 6.1. test the logging
     logging.info("  TAG = %s\n %s", TAG, jokes.get_random_joke())  # test
 
     # 6.2. run the main function
@@ -105,6 +125,9 @@ if __name__ == "__main__":
 
 # %%
 """ 7. clean up / finish """
+# close the figures
+plt.close("all") 
+
 # end with a joke
 logging.info("  %s", jokes.get_random_joke())
 
