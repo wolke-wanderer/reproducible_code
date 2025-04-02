@@ -1,0 +1,69 @@
+General Information
+
+This workshop teaches you the skills to make your code reusable by others. You will practice these skills by directly applying them to your own project. Inevitably, this will make your research more reproducible.
+
+You should bring your own coding project to the workshop that you would like to make reusable and share with others. This can range from a few small scripts to an extensive piece of software.
+Who: 
+
+This workshop is aimed at researchers who want to make their code reusable. You are able to write basic code in a programming language like R or Python. This can be a few simple lines of code or a larger piece of software.
+
+Where: Langeveld Building room 0.18 , Burgemeester Oudlaan 50, 3062 PA Rotterdam. Get directions with OpenStreetMap or Google Maps.
+
+When: April 3, 2025, 9:30 - 17:00.
+
+Requirements: Participants must bring a laptop with a Mac, Linux, or Windows operating system (not a tablet, Chromebook, etc.) that they have administrative privileges on. They should have a few specific software packages installed (listed below). They should bring their own coding project to the workshop. This can range from a few small scripts to an extensive piece of software.
+
+Accessibility: We are committed to making this workshop accessible to everybody. The workshop organizers have checked that:
+
+    The room is wheelchair / scooter accessible.
+    Accessible restrooms are available.
+
+Materials will be provided in advance of the workshop and large-print handouts are available if needed by notifying the organizers in advance. If we can help making learning easier for you (e.g. sign-language interpreters, lactation facilities) please get in touch (using contact details below) and we will attempt to provide them.
+
+Workshop files: You will find all slides, notebooks, archived collaborative documents, and other relevant files in the files folder of the workshop website repository after the workshop.
+
+Contact: Please email e.klapwijk@essb.eur.nl for more information.
+Code of Conduct
+
+Participants are expected to follow these guidelines:
+
+    Use welcoming and inclusive language
+    Be respectful of different viewpoints and experiences
+    Gracefully accept constructive criticism
+    Focus on what is best for the community
+    Show courtesy and respect towards other community members
+
+Syllabus
+
+    Why is reproducibility important?
+    How do I share my code with others using GitHub?
+    What is the minimal documentation required for others to be able to run my code?
+        Writing a good README file
+        Dealing with dependencies
+    What makes code readable and reusable?
+    Code conventions and modular coding
+
+Schedule
+
+    09:30 Welcome & icebreaker
+    09:45 Workshop introduction: why is reproducibility important?
+    10:15 Software dependencies
+    10:30 break
+    10:40 Software dependencies continuation
+    11:00 Software documentation
+    11:30 break
+    11:40 Code conventions and modular coding
+    12:30 Lunch
+    13:30 Next steps: how to make your code reusable?
+    13:45 Work on your own project
+    15:00 break
+    15:10 Reusability check
+    16:15 Wrap-up
+    16:30 DRINKS
+
+Setup
+
+To participate in this workshop, you will need to finish the [pre-workshop assignment](https://esciencecenter-digital-skills.github.io/reproducible-research-through-reusable-code/github.html) before the workshop day.
+
+We maintain a list of common issues that occur during installation as a reference for instructors that may be useful on the Configuration Problems and Solutions wiki page.
+Copyright © 2016–2025 The Carpentries
