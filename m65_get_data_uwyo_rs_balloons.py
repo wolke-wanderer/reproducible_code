@@ -216,7 +216,7 @@ def get_balloon_data_from_uwyo(stnm: int, region: str, year: int, month: int) ->
         ds.coords["lat"] = meta_dict["Station latitude"]
         ds.coords["elevation"] = meta_dict["Station elevation"]
         ds.coords["instrument"] = meta_dict["Station number"]
-        ds.coords["reference_time"] = pd.to_datetime(f"20{meta_dict['Observation time']} Z")
+        ds.coords["reference_time"] = pd.to_datetime(f"20{meta_dict['Observation time']} Z").isoformat()
 
         # add a description
         ds.attrs["description"] = "Radiosonde data provided by the University of Wyoming"
