@@ -18,6 +18,11 @@
     This module creates skew-T plots with hodographs and additional information for radiosonde data.
     # TODO: profiles of Richardson number, and brunt-vaisala frequency from radiosonde data.
 """
+# module level dunders
+# __all__ = ["__version__", "__author__"]  # TODO: learn __all__ and use it
+__version__ = "0.1"
+__author__ = "Falco Bentvelsen"
+
 ## %%
 # 1.-3. import packages:
 # 1. import general packages
@@ -63,7 +68,8 @@ TAG = "2025_skewT_adv_rsb_t2"
 configure.setup_logging(tag=TAG)  # set up logging
 logging.info(jokes.get_random_joke())  # test
 #######################################################################
-# # # stnm = 10868  # Munchen
+# %%
+# # Uncomment the following parameters for usage testing (manual)
 # stnm = 10548  # Meinigen (150 km West of WBCI)
 # year = 2020
 # month = 10
@@ -74,7 +80,6 @@ logging.info(jokes.get_random_joke())  # test
 #     station_title = "München-Oberschlssheim"
 # elif stnm == 10548:
 #     station_title = "Meiningen"
-
 
 ##############################################################################
 # %%
@@ -93,11 +98,9 @@ def load_radiosonde_data(stnm, year, month, day, hour) -> xr.Dataset:
     Returns:
         xr.Dataset: _description_
     """
+    # set the path to the netcdf directory
     ncdir = f"data/balloons_rs/stnm_{stnm}/{year}/netcdf"
     logging.info("opening nc file(s) in directory: %s", ncdir)
-    # for fname in os.listdir(ncdir):
-    #     if fname.endswith(".nc"):
-    #         logging.info("opening file: %s", fname)
 
     # open the radiosonde data file
     fname = f"sid.{stnm}_tid.{str(year)[-2:]}{month:02d}{day:02d}.{hour:02d}00Z.nc"
@@ -160,10 +163,7 @@ def extract_sounding_ds2mpy(ds: xr.Dataset) -> tuple:
     # calculate wind components u and v
     u, v = mpcalc.wind_components(wind_speed, wind_dir)
 
-    # logging.info("metpy data: \n%s", ["p", p, "T", T, "Td", Td, "mag", wind_speed, "baz/az", wind_dir, "u", u, "v", v])
-
     return p, z, T, Td, wind_speed, u, v
-
 
 # # example usage
 # p, z, T, Td, wind_speed, u, v = extract_sounding_ds2mpy(ds)

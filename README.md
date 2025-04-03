@@ -4,8 +4,36 @@ What if we go up? Estimating atmospheric profiles from balloon data
 ## Motivation (why the project exists)
 We want to know what the weather will be tomorrow, so we estimate atmospheric parameters from so-called radiosonde balloons that are released worldwide by meteorological institutes. We do a case study in Germany to compare with a [new wind estimation method being developed at KNMI](https://www.knmi.nl/research/seismology-acoustics/projects/tracking-jet-stream-winds-mso-project). 
 
-## How to setup
+## Setup
 - install the packages in a virtual environment from requirements.txt
+Installation
+
+Create a clone, or copy of the xcorr repository in an empty directory
+
+```bash
+git clone https://github.com/wolke-wanderer/reproducible_code
+```
+
+Run git pull to update the local repository to this master repository.
+
+Install required packages in a virtual environment via pip:
+```bash
+# Create a new virtual environment
+python3 -m venv reproducible_venv
+
+# Activate the virtual environment
+source reproducible_venv/bin/activate # On Windows use: reproducible_venv\Scripts\activate
+
+# Install the required packages from requirements.txt
+pip install -r requirements.txt
+```
+
+Required are Python3.7 or higher and the modules NumPy, SciPy, ObsPy, Pandas, and Xarray. Dask is required to run the scripts but needed for the base functionality.
+
+Create a conda environment named xcorr with Python 3.9 and all required packages:
+
+conda env create -f environment.yml
+
 - Run the [m65_get_data_uwyo_rs_balloons.py](./m65_get_data_uwyo_rs_balloons.py) file to scrape balloon data from the web for a Bavarian station for the first months of 2025
 - Run the [m66_wip_create_profiles_rsb.py](./m66_wip_create_profiles_rsb.py) file to make vertical profiles
 

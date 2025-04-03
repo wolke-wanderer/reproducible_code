@@ -17,6 +17,11 @@
 :summary:
     This module downloads radiosonde profiles from the University of Wyoming and writes them to disk.
 """
+# module level dunders
+# __all__ = ["__version__", "__author__"]  # TODO: learn __all__ and use it
+__version__ = "0.1"
+__author__ = "Falco Bentvelsen"
+
 ## %%
 # 1.-3. import packages:
 # 1. import general packages
@@ -120,7 +125,6 @@ def get_balloon_data_from_uwyo(stnm: int, region: str, year: int, month: int) ->
             logging.error("retrying ...")
             got_response = False
 
-    # print(response.text)
     ## %%
 
     response = raw_response.text
@@ -163,7 +167,7 @@ def get_balloon_data_from_uwyo(stnm: int, region: str, year: int, month: int) ->
 
         ## %%
         # first split the table into lines
-        lines = table.split("\n")
+        # lines = table.split("\n")
         # logging.info("number of lines = %s", len(lines))
 
         # get the header line
@@ -238,12 +242,10 @@ if __name__ == "__main__":
 
         dir_path, sounding_id = get_balloon_data_from_uwyo(stnm=stnm, region=region, year=year, month=month)
 
-    ## %%
     # open the last netcdf file to check if it is saved correctly
     ds = xr.open_dataset(f"{dir_path}/netcdf/{sounding_id}Z.nc")
     logging.info("testing the last netcdf file saved for the xarray content: \n%s", ds)
 
-    ## %%
     logging.info("feierabend   ------>  %s", jokes.get_random_joke())
 
     # %%
