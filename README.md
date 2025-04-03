@@ -41,6 +41,8 @@ python3 m65_get_data_uwyo_rs_balloons.py
 python3 m66_wip_create_profiles_rsb.py
 ```
 
+Congratiolations! Your generated balloon profiles are in a subfolder of ./figures/ (keep in diving in)
+
 ## Copy-pastable quick start code example
 - an example balloon sounding can be found in folder [./example_data](./example_data/raw_text/sid.10548_tid.250403.0000Z.txt), both in .txt (for easy reading) and .netcdf (standard format used in computations)
 
