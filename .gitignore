@@ -1,11 +1,11 @@
 data/
 figures/
+logs/chip_OLD.log
 .idea/
 .DS_Store
 archive/
-__pycache__/
 */__pycache__/
 */archive
-course_notes*
-m2_get_waveforms*.py
-.gitignore
+__pycache__/
+course_notes.md
+m2_get_wave*.py
