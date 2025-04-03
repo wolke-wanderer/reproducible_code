@@ -233,7 +233,7 @@ def get_balloon_data_from_uwyo(stnm: int, region: str, year: int, month: int) ->
 # 6. main code
 
 if __name__ == "__main__":
-    for year, month in product([2025], range(1, 5)):
+    for year, month in product([2025], range(3, 4)):
         logging.info("year = %s, month = %s", year, month)
 
         dir_path, sounding_id = get_balloon_data_from_uwyo(stnm=stnm, region=region, year=year, month=month)

@@ -24,21 +24,19 @@
 ########################################
 import os
 from IPython import get_ipython
-# import calendar
 
 # 2. import third party packages
 ########################################
 import numpy as np
-# import pandas as pd
 import xarray as xr
 
 import metpy.calc as mpcalc
 from metpy.plots import Hodograph, SkewT
 from metpy.units import units
+from pint import Quantity
 
 import matplotlib.pyplot as plt
 import seaborn as sns
-# from lxml import etree
 
 # 3. import local packages
 ########################################
@@ -124,15 +122,22 @@ def extract_radiosonde_data(ncdir, fname):
 # ds
 
 # %%
-def extract_sounding_ds2mpy(ds):
+def extract_sounding_ds2mpy(ds: xr.Dataset) -> tuple:
     """get the units from the dataset Data variables units and extract the data to metpy format
 
     Args:
-        ds (_type_): _description_
+        ds (xr.Dataset): xarray dataset containing the radiosonde data with metpy units
 
     Returns:
-        multiple vars: p,z,T,Td,wind_speed,u,v
+        p (Quantity): pressure data
+        z (Quantity): altimetric height data
+        T (Quantity): temperature data
+        Td (Quantity): dewpoint temperature data
+        wind_speed (Quantity): total horizontal wind speed data
+        u (Quantity): zonal wind component data
+        v (Quantity): meridional wind component data
     """
+
     p_unit = ds["PRES"].units  # hPa
     z_unit = ds["HGHT"].units  # m
     T_unit = ds["TEMP"].units  # C
@@ -216,29 +221,42 @@ def metpy_skewT_simple(p, T, Td, u, v) -> plt.Figure:
 
 # %%
 def metpy_skewT_advanced(
-    stnm, year, month, day, hour, station_title, ds, p, z, T, Td, wind_speed, u, v
+    stnm: str | int,
+    year: str | int,
+    month: str | int,
+    day: str | int,
+    hour: str | int,
+    station_title: str,
+    d: xr.Dataset,
+    p: Quantity,
+    z: Quantity,
+    T: Quantity,
+    Td: Quantity,
+    wind_speed: Quantity,
+    u: Quantity,
+    v: Quantity,
 ) -> plt.Figure:
     """Make a Skew-T plot with hodograph inset, wind barbs, and some extra elements.
     Inspired by the Metpy example: Advanced_Sounding_With_Complex_Layout.html
 
     Args:
-        stnm (_type_): _description_
-        year (_type_): _description_
-        month (_type_): _description_
-        day (_type_): _description_
-        hour (_type_): _description_
-        station_title (_type_): _description_
-        ds (_type_): _description_
-        p (_type_): _description_
-        z (_type_): _description_
-        T (_type_): _description_
-        Td (_type_): _description_
-        wind_speed (_type_): _description_
-        u (_type_): _description_
-        v (_type_): _description_
+        stnm (str | int): station number identifier
+        year (str | int): year of the sounding
+        month (str | int): month of the sounding (01-12)
+        day (str | int): day of the sounding (01-31)
+        hour (str | int): hour of the sounding (00-23)
+        station_title (str): human-readable station name
+        ds (xr.Dataset): xarray dataset containing the radiosonde data
+        p (Quantity): pressure data
+        z (Quantity): altimetric height data
+        T (Quantity): temperature data
+        Td (Quantity): dewpoint temperature data
+        wind_speed (Quantity): total horizontal wind speed data
+        u (Quantity): zonal wind component data
+        v (Quantity): meridional wind component data
 
     Returns:
-        plt.Figure: _description_
+        plt.Figure: a figure object with the vertical profile and hodograph
     """
     # STEP 1: CREATE THE SKEW-T OBJECT
     #######################################################################
@@ -500,6 +518,7 @@ def metpy_skewT_advanced(
 # %%
 # 6. main
 if __name__ == "__main__":
+    # # choose the balloon release station
     # stnm = 10868  # Munchen
     stnm = 10548  # Meinigen (150 km West of WBCI)
 
@@ -548,7 +567,6 @@ if __name__ == "__main__":
                 fig = metpy_skewT_advanced(
                     stnm, year, month, day, hour, station_title, ds, p, z, T, Td, wind_speed, u, v
                 )
-
 
                 # save the figure
                 #######################################################################
