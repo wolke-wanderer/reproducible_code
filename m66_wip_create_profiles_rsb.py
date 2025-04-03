@@ -6,7 +6,7 @@
     Falco Bentvelsen (falco.bentvelsen@knmi.nl)
 
 :copyright:
-    2024, Falco Bentvelsen
+    2025, Falco Bentvelsen
 
 :license:
     This code is distributed under the terms of the
@@ -60,7 +60,7 @@ sns.set_theme(style="whitegrid")
 
 # define TAG for saving and logging
 #######################################################################
-TAG = "2023_skewT_adv_rsb_t2"
+TAG = "2025_skewT_adv_rsb_t2"
 #######################################################################
 configure.setup_logging(tag=TAG)  # set up logging
 logging.info(jokes.get_random_joke())  # test
@@ -433,7 +433,10 @@ def metpy_skewT_advanced(
     plt.figtext(0.71, 0.18, f"{mucin:.0f~P}", color="lightblue", ha="right")
 
     # add the launch location
-    launch_text = f"{ds['lon'].values.all()} E / {ds['lat'].values.all()} N / {ds['elevation'].values.all()} m"
+    try:
+        launch_text = f"{ds['lon'].values.all()} E / {ds['lat'].values.all()} N / {ds['elevation'].values.all()} m"
+    except TypeError:
+        launch_text = f"{ds['lon'].values} E / {ds['lat'].values} N / {ds['elevation'].values} m"
     plt.figtext((0.58 + 0.88) / 2, 0.13, "LAUNCH:", ha="center")
     plt.figtext((0.58 + 0.88) / 2, 0.10, f"{launch_text}", ha="center")
 
@@ -497,8 +500,8 @@ def metpy_skewT_advanced(
 # %%
 # 6. main
 if __name__ == "__main__":
-    stnm = 10868  # Munchen
-    # stnm = 10548  # Meinigen (150 km West of WBCI)
+    # stnm = 10868  # Munchen
+    stnm = 10548  # Meinigen (150 km West of WBCI)
 
     if stnm == 10868:
         station_title = "München-Oberschlssheim"
@@ -506,11 +509,7 @@ if __name__ == "__main__":
         station_title = "Meiningen"
 
     # define lists of possible values for years, months, days, and hours
-    years = [2020, 2021, 2022, 2023]
-    # years = [2021, 2022, 2023]
-    # years = [2023]
-    # years = [2020]
-    # TODO: retrieve and process 2024
+    years = [2025]
     for year in years:
         TAG = f"{year}{TAG[4:]}"
         logging.info("TAG: %s", TAG)
@@ -534,10 +533,11 @@ if __name__ == "__main__":
 
                 # balloon sounding check (QC): if the data is not very complete, skip the plotting
                 # QC check: if the max pressure is below 850 hPa or the min pressure is above 195 hPa
-                # TODO: check arbitrary QC values
-                if p.magnitude.max() < 850 or p.magnitude.min() > 195:
+                # Ensure valid numeric data in p.magnitude
+                valid_p = p.magnitude[np.isfinite(p.magnitude)]
+                if valid_p.size == 0 or valid_p.max() < 850 or valid_p.min() > 195:
                     logging.warning(
-                        "\n%s\n  skipping file: %s due to missing data \n%s\n",
+                        "\n%s\n  skipping file: %s due to missing or invalid data \n%s\n",
                         "*" * 80,
                         fname,
                         "*" * 80,
@@ -548,6 +548,7 @@ if __name__ == "__main__":
                 fig = metpy_skewT_advanced(
                     stnm, year, month, day, hour, station_title, ds, p, z, T, Td, wind_speed, u, v
                 )
+
 
                 # save the figure
                 #######################################################################
