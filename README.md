@@ -28,14 +28,13 @@ source reproducible_venv/bin/activate # On Windows use: reproducible_venv\Script
 pip install -r requirements.txt
 ```
 
-Required are Python3.7 or higher and the modules NumPy, SciPy, ObsPy, Pandas, and Xarray. Dask is required to run the scripts but needed for the base functionality.
-
-Create a conda environment named xcorr with Python 3.9 and all required packages:
+Required are Python3.12 or higher and the modules to install from requiremeents.txt
 
 conda env create -f environment.yml
 
-- Run the [m65_get_data_uwyo_rs_balloons.py](./m65_get_data_uwyo_rs_balloons.py) file to scrape balloon data from the web for a Bavarian station for the first months of 2025
-- Run the [m66_wip_create_profiles_rsb.py](./m66_wip_create_profiles_rsb.py) file to make vertical profiles
+- Run the [m65_get_data_uwyo_rs_balloons.py](./m65_get_data_uwyo_rs_balloons.py) file to scrape balloon data from the web for a Bavarian station for march 2025
+    - There's also example data for 31st of march if this doesn't work, so this step may be skipped.
+- Run the [m66_wip_create_profiles_rsb.py](./m66_wip_create_profiles_rsb.py) file to make vertical profiles of what is measured in the balloon
 
 ## Copy-pastable quick start code example
 - an example balloon sounding can be found in folder [./example_data](./example_data/raw_text/sid.10548_tid.250403.0000Z.txt), both in .txt (for easy reading) and .netcdf (standard format used in computations)
@@ -45,4 +44,4 @@ conda env create -f environment.yml
 - no active maintenance is done
 
 ## Recommended citation
-TBD
+TODO...
