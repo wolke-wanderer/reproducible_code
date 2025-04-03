@@ -7,3 +7,5 @@ __pycache__/
 */__pycache__/
 */archive
 course_notes*
+m2_get_waveforms*.py
+.gitignore
