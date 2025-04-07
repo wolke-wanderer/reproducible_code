@@ -1,0 +1,10 @@
+gitignore
+data/
+figures/
+.idea/
+.DS_Store
+archive/
+*/__pycache__/
+*/archive
+__pycache__/
+course_notes.md
